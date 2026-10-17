@@ -1,5 +1,7 @@
 # Eu sou o melhor — projeto APK
 
+Eu sou o melhor: Agenda  Nome: Eu sou o melhor Criador: Manuel Sadi Kufika Versão: 1.0 (APK de depuração, para uso pessoal). O lema da app é: “Eu sou o melhor. Se não pensarmos assim, não temos ambição.”
+
 ## Opção A: sem instalar nada (GitHub)
 1. Cria uma conta gratuita em github.com e um repositório novo.
 2. Envia todos os ficheiros desta pasta (incluindo a pasta `.github`).
