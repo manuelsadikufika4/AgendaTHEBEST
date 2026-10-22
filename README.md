@@ -7,7 +7,7 @@
 
 > *"Eu sou o melhor. Se não pensarmos assim, não temos ambição."*
 >
-> — **Manuel Sadi Kufika**
+> — **Cristiano Ronaldo, 2015**
 
 ---
 
