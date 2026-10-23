@@ -1,9 +1,17 @@
 # <img src="https://raw.githubusercontent.com/twbs/icons/main/icons/rocket-takeoff-fill.svg" width="30" height="30" /> Eu Sou o Melhor — Agenda Android
 
-[![Autor](https://img.shields.io/badge/Criador-Manuel%20Sadi%20Kufika-blue?style=for-the-badge&logo=person-fill)](https://github.com)
-[![Versão](https://img.shields.io/badge/Vers%C3%A3o-1.3%20(APK%20Debug)-green?style=for-the-badge&logo=bootstrap)](https://github.com)
-[![Plataforma](https://img.shields.io/badge/Plataforma-Android-3DDC84?style=for-the-badge&logo=android)](https://android.com)
-[![Build](https://img.shields.io/badge/Build-GitHub%20Actions-2088FF?style=for-the-badge&logo=github-actions)](https://github.com)
+[![Autor](https://img.shields.io/badge/Criador-Manuel%20Sadi%20Kufika-blue?style=for-the-badge&logo=github)](https://github.com/manuelsadikufika4)
+[![Versão](https://img.shields.io/badge/Vers%C3%A3o-1.3%20(APK%20Debug)-green?style=for-the-badge&logo=bootstrap&logoColor=white)](https://github.com/manuelsadikufika4/AgendaTHEBEST)
+[![Plataforma](https://img.shields.io/badge/Plataforma-Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://www.android.com)
+[![Build](https://img.shields.io/badge/Build-GitHub%20Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/manuelsadikufika4/AgendaTHEBEST/actions)
+[![Capacitor](https://img.shields.io/badge/Capacitor-119EFF?style=for-the-badge&logo=capacitor&logoColor=white)](https://capacitorjs.com/)
+[![Offline](https://img.shields.io/badge/Dados-100%25%20Locais-2e7d4f?style=for-the-badge)](#-sobre-o-projeto)
+
+[![Stars](https://img.shields.io/github/stars/manuelsadikufika4/AgendaTHEBEST?style=flat&logo=github)](https://github.com/manuelsadikufika4/AgendaTHEBEST/stargazers)
+[![Forks](https://img.shields.io/github/forks/manuelsadikufika4/AgendaTHEBEST?style=flat&logo=github)](https://github.com/manuelsadikufika4/AgendaTHEBEST/network/members)
+[![Issues](https://img.shields.io/github/issues/manuelsadikufika4/AgendaTHEBEST?style=flat)](https://github.com/manuelsadikufika4/AgendaTHEBEST/issues)
+[![Último commit](https://img.shields.io/github/last-commit/manuelsadikufika4/AgendaTHEBEST?style=flat)](https://github.com/manuelsadikufika4/AgendaTHEBEST/commits/main)
+[![Contribuições](https://img.shields.io/badge/Contribui%C3%A7%C3%B5es-bem--vindas-brightgreen?style=flat)](CONTRIBUTING.md)
 
 > *"Eu sou o melhor. Se não pensarmos assim, não temos ambição."*
 >
@@ -44,12 +52,11 @@ Podes compilar a aplicação utilizando uma das duas opções abaixo:
 
 ### <img src="https://raw.githubusercontent.com/twbs/icons/main/icons/cloud-arrow-up-fill.svg" width="18" height="18" /> Opção A: Via GitHub Actions (Sem instalar nada no computador)
 
-1. Cria uma conta em [github.com](https://github.com) e cria um novo repositório.
-2. Envia todos os ficheiros do projeto (incluindo a pasta `.github`).
-3. No GitHub, acede ao separador **Actions** > **Gerar APK** > **Run workflow**.
-4. Aguarda a conclusão (aproximadamente 3 a 6 minutos).
-5. Abre a execução concluída e descarrega o artefacto **`agenda-melhor-apk`** (contém o ficheiro `app-debug.apk`).
-6. Transfere o APK para o telemóvel e instala (autoriza a opção *"Instalar aplicações de fontes desconhecidas"* se solicitado).
+1. Cria uma conta em [github.com](https://github.com) e faz **Fork** deste repositório (ou cria um novo e envia os ficheiros, incluindo a pasta `.github`).
+2. No teu repositório, acede ao separador **Actions** > **Gerar APK** > **Run workflow**.
+3. Aguarda a conclusão (aproximadamente 3 a 6 minutos).
+4. Abre a execução concluída e descarrega o artefacto **`agenda-melhor-apk`** (contém o ficheiro `app-debug.apk`).
+5. Transfere o APK para o telemóvel e instala (autoriza a opção *"Instalar aplicações de fontes desconhecidas"* se solicitado).
 
 ### <img src="https://raw.githubusercontent.com/twbs/icons/main/icons/laptop-fill.svg" width="18" height="18" /> Opção B: Compilação Local no Computador
 
@@ -62,6 +69,10 @@ Podes compilar a aplicação utilizando uma das duas opções abaixo:
 #### Passos para compilação:
 
 ```bash
+# 0. Clonar o repositório
+git clone https://github.com/manuelsadikufika4/AgendaTHEBEST.git
+cd AgendaTHEBEST
+
 # 1. Instalar dependências
 npm install
 
@@ -91,6 +102,34 @@ Para garantir que os alarmes e notificações funcionem sem falhas em segundo pl
 2. Acede à opção **Bateria**.
 3. Seleciona a opção **Sem restrições** (Unrestricted).
 4. Na primeira inicialização, concede as permissões de **Notificações** e **Alarmes Exatos**.
+
+---
+
+## <img src="https://raw.githubusercontent.com/twbs/icons/main/icons/folder-fill.svg" width="22" height="22" /> Estrutura do Projeto
+
+```
+AgendaTHEBEST/
+├── .github/workflows/     # Compilação automática do APK
+├── www/                   # Código da aplicação (HTML, CSS, JS)
+├── capacitor.config.json  # Configuração do Capacitor
+├── package.json
+├── patch-manifest.sh      # Correções aplicadas ao AndroidManifest
+├── CONTRIBUTING.md        # Guia para quem quer contribuir
+└── README.md
+```
+
+---
+
+## <img src="https://raw.githubusercontent.com/twbs/icons/main/icons/people-fill.svg" width="22" height="22" /> Contribuir
+
+Contribuições são bem-vindas! Podes ajudar a:
+
+* Reportar bugs, sobretudo alarmes que não disparam ou notificações que falham
+* Testar em diferentes marcas e versões de Android
+* Melhorar o código, o design e a documentação
+* Sugerir funcionalidades novas nas [Issues](https://github.com/manuelsadikufika4/AgendaTHEBEST/issues)
+
+Lê o guia completo em [CONTRIBUTING.md](CONTRIBUTING.md) antes de abrir um Pull Request.
 
 ---
 
