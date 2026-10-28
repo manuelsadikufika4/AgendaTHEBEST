@@ -1,6 +1,6 @@
 # Como contribuir
 
-Obrigado por quereres ajudar o **Eu Sou o Melhor — Agenda Android**! 🚀
+Obrigado por quereres ajudar o **Eu Sou o Melhor — Agenda Android**!
 Toda a ajuda é bem-vinda: correções de bugs, melhorias nos alarmes e notificações, design, testes em diferentes telemóveis e novas ideias.
 
 ## Formas de contribuir
