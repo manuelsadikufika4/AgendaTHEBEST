@@ -19,14 +19,13 @@ jobs:
       - name: Preparar projeto
         run: |
           mkdir -p www
-          # O Android distingue maiusculas de minusculas: o ficheiro tem de se chamar index.html
-          if [ -f www/Index.html ]; then
-            if [ ! -s www/index.html ]; then cp www/Index.html www/index.html; fi
-            rm -f www/Index.html
+          if [ ! -f www/index.html ]; then
+            F=$(ls *.html 2>/dev/null | head -n 1)
+            if [ -n "$F" ]; then cp "$F" www/index.html; fi
           fi
-          test -s www/index.html || { echo "ERRO - www/index.html nao existe ou esta vazio"; exit 1; }
+          test -f www/index.html || { echo "ERRO - falta o ficheiro index.html (a app) no repositorio"; exit 1; }
           test -f package.json || { echo "ERRO - falta o ficheiro package.json no repositorio"; exit 1; }
-          echo "index.html tem $(wc -c < www/index.html) bytes"
+          echo '{"appId":"com.eusoumelhor.agenda","appName":"Eu sou o melhor","webDir":"www"}' > capacitor.config.json
       - name: Instalar dependencias
         run: npm install
       - name: Criar projeto Android
@@ -35,7 +34,7 @@ jobs:
         run: |
           M=android/app/src/main/AndroidManifest.xml
           for P in POST_NOTIFICATIONS SCHEDULE_EXACT_ALARM USE_EXACT_ALARM VIBRATE RECEIVE_BOOT_COMPLETED WAKE_LOCK; do
-            grep -q "android.permission.$P\"" "$M" || sed -i "s#</manifest># <uses-permission android:name=\"android.permission.$P\" />\n</manifest>#" "$M"
+            grep -q "android.permission.$P\"" "$M" || sed -i "s#</manifest>#    <uses-permission android:name=\"android.permission.$P\" />\n</manifest>#" "$M"
           done
           grep uses-permission "$M"
       - name: Sincronizar
