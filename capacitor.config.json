@@ -1,9 +1,0 @@
-{
-  "appId": "com.eusoumelhor.agenda",
-  "appName": "Eu sou o melhor",
-  "webDir": "www",
-  "backgroundColor": "#0b3bb5",
-  "server": {
-    "androidScheme": "https"
-  }
-}
