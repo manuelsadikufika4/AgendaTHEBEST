@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Eu Sou o Melhor</string>
+    <string name="title_activity_main">Eu Sou o Melhor</string>
+    <string name="package_name">com.agendamelhor.app</string>
+    <string name="custom_url_scheme">com.agendamelhor.app</string>
+</resources>
