@@ -1,47 +1,81 @@
 name: Gerar APK
+
 on:
   workflow_dispatch:
   push:
+    branches:
+      - main
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Clonar repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-      - uses: actions/setup-java@v4
+          cache: npm
+
+      - name: Configurar Java (JDK 17)
+        uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 17
-      - name: Ver ficheiros do repositorio
+
+      - name: Ver ficheiros do repositório
         run: ls -la
+
       - name: Preparar projeto
         run: |
+          set -e
           mkdir -p www
           if [ ! -f www/index.html ]; then
             F=$(ls *.html 2>/dev/null | head -n 1)
-            if [ -n "$F" ]; then cp "$F" www/index.html; fi
+            if [ -n "$F" ]; then
+              cp "$F" www/index.html
+            fi
           fi
-          test -f www/index.html || { echo "ERRO - falta o ficheiro index.html (a app) no repositorio"; exit 1; }
-          test -f package.json || { echo "ERRO - falta o ficheiro package.json no repositorio"; exit 1; }
-          echo '{"appId":"com.eusoumelhor.agenda","appName":"Eu sou o melhor","webDir":"www"}' > capacitor.config.json
-      - name: Instalar dependencias
-        run: npm install
+          test -f www/index.html || { echo "ERRO - falta o ficheiro index.html (a app) no repositório"; exit 1; }
+          test -f package.json || { echo "ERRO - falta o ficheiro package.json no repositório"; exit 1; }
+          if [ ! -f capacitor.config.json ]; then
+            echo '{"appId":"com.eusoumelhor.agenda","appName":"Eu sou o melhor","webDir":"www"}' > capacitor.config.json
+          fi
+
+      - name: Instalar dependências
+        run: npm ci || npm install
+
       - name: Criar projeto Android
         run: npx cap add android
-      - name: Adicionar permissoes de alarmes e notificacoes
+
+      - name: Adicionar permissões de alarmes e notificações
         run: |
-          M=android/app/src/main/AndroidManifest.xml
-          for P in POST_NOTIFICATIONS SCHEDULE_EXACT_ALARM USE_EXACT_ALARM VIBRATE RECEIVE_BOOT_COMPLETED WAKE_LOCK; do
-            grep -q "android.permission.$P\"" "$M" || sed -i "s#</manifest>#    <uses-permission android:name=\"android.permission.$P\" />\n</manifest>#" "$M"
-          done
-          grep uses-permission "$M"
+          set -e
+          if [ -f patch-manifest.sh ]; then
+            chmod +x patch-manifest.sh
+            bash patch-manifest.sh
+          else
+            M=android/app/src/main/AndroidManifest.xml
+            for P in POST_NOTIFICATIONS SCHEDULE_EXACT_ALARM USE_EXACT_ALARM VIBRATE RECEIVE_BOOT_COMPLETED WAKE_LOCK; do
+              grep -q "android.permission.$P\"" "$M" || sed -i "s#</manifest>#    <uses-permission android:name=\"android.permission.$P\" />\n</manifest>#" "$M"
+            done
+            grep uses-permission "$M"
+          fi
+
       - name: Sincronizar
         run: npx cap sync android
+
       - name: Compilar APK
-        run: cd android && chmod +x gradlew && ./gradlew assembleDebug
-      - uses: actions/upload-artifact@v4
+        run: |
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleDebug
+
+      - name: Carregar artefacto APK
+        uses: actions/upload-artifact@v4
         with:
           name: agenda-melhor-apk
           path: android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
